@@ -1,0 +1,39 @@
+@import "tailwindcss";
+@import "./shared/styles/tokens.css";
+
+@theme inline {
+  --color-vert-cap: var(--vert-cap);
+  --color-vert-cap-fonce: var(--vert-cap-fonce);
+  --color-marine: var(--marine);
+  --color-encre: var(--encre);
+  --color-encre-douce: var(--encre-douce);
+  --color-papier: var(--papier);
+  --color-brume: var(--brume);
+  --color-seve: var(--seve);
+  --color-bordure: var(--bordure);
+  --color-erreur: var(--erreur);
+
+  --font-titre: var(--police-titre);
+  --font-texte: var(--police-texte);
+
+  --text-petit: var(--t-petit);
+  --text-corps: var(--t-corps);
+  --text-lead: var(--t-lead);
+  --text-h3: var(--t-h3);
+  --text-h2: var(--t-h2);
+  --text-h1: var(--t-h1);
+}
+
+body {
+  font-family: var(--police-texte);
+  font-size: var(--t-corps);
+  line-height: 1.6;
+  color: var(--encre);
+  background: var(--papier);
+}
+
+h1, h2, h3 {
+  font-family: var(--police-titre);
+  font-weight: 600;
+  line-height: 1.2;
+}

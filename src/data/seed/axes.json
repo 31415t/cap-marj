@@ -1,0 +1,6 @@
+[
+  { "id": "axe-sante-globale", "slug": "sante-globale", "name": "Santé globale", "summary": "Accompagnement psychologique et psychosocial, prévention et promotion de la santé mentale.", "position": 1, "isPublished": true },
+  { "id": "axe-recherche", "slug": "recherche-integree", "name": "Recherche intégrée", "summary": "Production et valorisation des connaissances utiles à la compréhension des réalités locales.", "position": 2, "isPublished": true },
+  { "id": "axe-entrepreneuriat", "slug": "entrepreneuriat-social", "name": "Entrepreneuriat social", "summary": "Développement d'initiatives sociales à impact pour le bien-être collectif.", "position": 3, "isPublished": true },
+  { "id": "axe-engagement", "slug": "engagement-communautaire", "name": "Engagement communautaire", "summary": "Mobilisation communautaire et contribution au développement local.", "position": 4, "isPublished": true }
+]

@@ -1,0 +1,7 @@
+[
+  { "id": "faq-01", "question": "Comment prendre contact avec le CAP-MARJ ?", "answer": "Vous pouvez nous écrire via le formulaire de contact du site, nous appeler ou nous joindre par WhatsApp aux numéros affichés sur la page Contact.", "position": 1, "isPublished": true },
+  { "id": "faq-02", "question": "Quels services propose le centre ?", "answer": "Le CAP-MARJ propose cinq services : consultation et accompagnement psychologique, accompagnement académique et universitaire, recherche intégrée, formation et renforcement des capacités, engagement communautaire et développement local.", "position": 2, "isPublished": true },
+  { "id": "faq-03", "question": "Comment se déroule une première consultation ?", "answer": "À rédiger avec le client (PRD-Q17).", "position": 3, "isPublished": true },
+  { "id": "faq-04", "question": "Mes informations sont-elles confidentielles ?", "answer": "À rédiger avec le client (PRD-Q17).", "position": 4, "isPublished": true },
+  { "id": "faq-05", "question": "Le centre peut-il répondre aux urgences ?", "answer": "Le CAP-MARJ ne peut pas répondre aux urgences par le site. En cas de danger immédiat, contactez les secours ou rendez-vous au service d'urgence le plus proche.", "position": 5, "isPublished": true }
+]

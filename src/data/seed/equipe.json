@@ -1,0 +1,92 @@
+[
+  {
+    "id": "membre-01",
+    "fullName": "Jean Renold Alphonse",
+    "displayTitle": "Fondateur, psychologue et professeur",
+    "shortBio": "Psychologue, professeur d'université, chercheur et entrepreneur social haïtien, fondateur du CAP-MARJ en 2017.",
+    "fullBio": "Psychologue, professeur d'université, chercheur et entrepreneur social haïtien. Son parcours académique comprend un diplôme de l'École Normale d'Instituteurs du Nord-Ouest (ENINO) en 2011, une licence en psychologie de l'Université de la Vallée (UV) en 2017, une maîtrise en psychologie sociale de la CUF en 2020, une maîtrise en psychologie du développement de l'enfant et de l'adolescent de l'UFCH en 2021 et une licence en sciences juridiques de l'Université d'État d'Haïti (UEH) en 2026. Il poursuit actuellement un doctorat en criminologie et lutte contre la corruption à l'ISTEAH. Le 10 octobre 2017, il fonde à Port-de-Paix le Centre d'Appui Psycho-Médical Jean Renold Alphonse (CAP-MARJ).",
+    "photoPath": null,
+    "position": 1,
+    "isPublished": true
+  },
+  {
+    "id": "membre-02",
+    "fullName": "Wensky Joseph",
+    "displayTitle": "Coordonnateur de la branche Recherche",
+    "shortBio": "Sociologue, titulaire d'une licence en sociologie de l'Université Valparaiso.",
+    "fullBio": "Wensky Joseph est sociologue, titulaire d'une licence en sociologie de l'Université Valparaiso. Ses intérêts professionnels s'inscrivent notamment dans l'analyse des réalités sociales et des dynamiques communautaires. Il assure actuellement la fonction de coordonnateur de la branche Recherche du CAP-MARJ, où il contribue à la conception, à la coordination et au développement des activités de recherche de l'institution.",
+    "photoPath": null,
+    "position": 2,
+    "isPublished": true
+  },
+  {
+    "id": "membre-03",
+    "fullName": "Daphné Charlotin",
+    "displayTitle": "Coordonnatrice de la branche Santé mentale",
+    "shortBio": "Psychologue, coordonnatrice de la branche Santé mentale du CAP-MARJ.",
+    "fullBio": "Daphné Charlotin est psychologue et coordonnatrice de la Branche Santé mentale du CAP-MARJ. Dans le cadre de ses fonctions, elle contribue à la coordination des activités liées à la santé mentale, à l'accompagnement psychologique et à la promotion du bien-être psychologique au sein de l'institution et auprès des communautés desservies.",
+    "photoPath": null,
+    "position": 3,
+    "isPublished": true
+  },
+  {
+    "id": "membre-04",
+    "fullName": "Clotaire MESIDOR",
+    "displayTitle": "Coordonnateur des affaires sanitaires",
+    "shortBio": "Docteur en médecine, professeur à l'université et directeur médical d'INNOVATION MEDICAL CLINIC.",
+    "fullBio": "Le Dr Clotaire MESIDOR est docteur en médecine et professeur à l'université. Il exerce comme médecin de service à l'Hôpital Immaculée Conception (HIC) de Port-de-Paix ainsi qu'au Centre Médical COHASA. Il est également Directeur Médical d'INNOVATION MEDICAL CLINIC, où il participe à la coordination et au développement des activités médicales et à l'amélioration de la qualité des soins. Son parcours professionnel s'articule autour de la pratique médicale, de l'enseignement universitaire, de l'encadrement académique et de la gestion médicale, avec un engagement constant en faveur de la formation des futurs professionnels de santé et du développement du système de soins.",
+    "photoPath": null,
+    "position": 4,
+    "isPublished": true
+  },
+  {
+    "id": "membre-05",
+    "fullName": "Jackson EXANTUS",
+    "displayTitle": "Responsable logistique et financier",
+    "shortBio": "Masterant en Sciences de l'Éducation, double licencié en sciences de l'éducation et en administration publique, enseignant.",
+    "fullBio": "Jackson EXANTUS est masterant en Sciences de l'Éducation (Accessibilité, Management et Éducation Inclusive). Il est double licencié en sciences de l'Éducation et en Administration publique. Enseignant, il assure la fonction de Responsable logistique et financier au CAP-MARJ.",
+    "photoPath": null,
+    "position": 5,
+    "isPublished": true
+  },
+  {
+    "id": "membre-06",
+    "fullName": "Me. Dophly LUBIN",
+    "displayTitle": "Responsable d'images et du numérique",
+    "shortBio": "Juriste, coach en art oratoire et technicien en développement communautaire.",
+    "fullBio": "Me. Dophly LUBIN est juriste, coach en art oratoire et technicien en développement communautaire. Il assure la fonction de Responsable d'images et du numérique au CAP-MARJ, où il contribue à la communication, à la gestion de l'image institutionnelle et aux outils numériques du Centre.",
+    "photoPath": null,
+    "position": 6,
+    "isPublished": true
+  },
+  {
+    "id": "membre-07",
+    "fullName": "Noberson Dely",
+    "displayTitle": "Chargé des relations publiques",
+    "shortBio": "Agent de santé communautaire polyvalent, chargé des relations publiques du CAP-MARJ.",
+    "fullBio": "Noberson Dely est agent de santé communautaire polyvalent. Il assure la fonction de chargé des relations publiques du CAP-MARJ, où il contribue aux liens entre le Centre et les communautés desservies.",
+    "photoPath": null,
+    "position": 7,
+    "isPublished": true
+  },
+  {
+    "id": "membre-08",
+    "fullName": "Amos Olibrice",
+    "displayTitle": "Responsable chargé des relations publiques",
+    "shortBio": "Juriste, étudiant en philosophie et politique, maître de cérémonie.",
+    "fullBio": "Amos Olibrice est juriste, étudiant en philosophie et politique et maître de cérémonie. Il est responsable chargé des relations publiques du CAP-MARJ. À travers ses fonctions, il contribue au développement des relations institutionnelles, à la communication avec les partenaires et à la représentation du Centre auprès de ses différents interlocuteurs. Son parcours multidisciplinaire lui permet également de participer à la réflexion sur les enjeux juridiques, sociaux et politiques liés aux interventions du CAP-MARJ.",
+    "photoPath": null,
+    "position": 8,
+    "isPublished": true
+  },
+  {
+    "id": "membre-09",
+    "fullName": "Exantia Louis",
+    "displayTitle": "Responsable des archives et de la documentation",
+    "shortBio": "Infirmière licenciée et entrepreneure, responsable des archives et de la documentation.",
+    "fullBio": "Exantia Louis est infirmière licenciée et entrepreneure. Elle assure la fonction de responsable des archives et de la documentation du CAP-MARJ, où elle veille à l'organisation, à la conservation et à la gestion de la documentation institutionnelle, contribuant ainsi à la structuration et à la mémoire administrative du Centre.",
+    "photoPath": null,
+    "position": 9,
+    "isPublished": true
+  }
+]
