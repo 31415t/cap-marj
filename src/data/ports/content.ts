@@ -1,4 +1,4 @@
-import type { Organisation, Axe, TeamMember, Service, FaqItem } from '../contracts'
+import type { Organisation, Axe, TeamMember, Service, FaqItem, TimelineEvent } from '../contracts'
 
 export interface ContentRepository {
   getOrganisation(): Promise<Organisation>
@@ -6,4 +6,5 @@ export interface ContentRepository {
   listTeam(): Promise<TeamMember[]>
   listServices(): Promise<Service[]>
   listFaq(): Promise<FaqItem[]>
+  listTimeline(): Promise<TimelineEvent[]>
 }

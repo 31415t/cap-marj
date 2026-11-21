@@ -1,6 +1,7 @@
 [
   {
     "id": "membre-01",
+    "slug": "jean-renold-alphonse",
     "fullName": "Jean Renold Alphonse",
     "displayTitle": "Fondateur, psychologue et professeur",
     "shortBio": "Psychologue, professeur d'université, chercheur et entrepreneur social haïtien, fondateur du CAP-MARJ en 2017.",
@@ -11,6 +12,7 @@
   },
   {
     "id": "membre-02",
+    "slug": "wensky-joseph",
     "fullName": "Wensky Joseph",
     "displayTitle": "Coordonnateur de la branche Recherche",
     "shortBio": "Sociologue, titulaire d'une licence en sociologie de l'Université Valparaiso.",
@@ -21,6 +23,7 @@
   },
   {
     "id": "membre-03",
+    "slug": "daphne-charlotin",
     "fullName": "Daphné Charlotin",
     "displayTitle": "Coordonnatrice de la branche Santé mentale",
     "shortBio": "Psychologue, coordonnatrice de la branche Santé mentale du CAP-MARJ.",
@@ -31,6 +34,7 @@
   },
   {
     "id": "membre-04",
+    "slug": "clotaire-mesidor",
     "fullName": "Clotaire MESIDOR",
     "displayTitle": "Coordonnateur des affaires sanitaires",
     "shortBio": "Docteur en médecine, professeur à l'université et directeur médical d'INNOVATION MEDICAL CLINIC.",
@@ -41,6 +45,7 @@
   },
   {
     "id": "membre-05",
+    "slug": "jackson-exantus",
     "fullName": "Jackson EXANTUS",
     "displayTitle": "Responsable logistique et financier",
     "shortBio": "Masterant en Sciences de l'Éducation, double licencié en sciences de l'éducation et en administration publique, enseignant.",
@@ -51,6 +56,7 @@
   },
   {
     "id": "membre-06",
+    "slug": "dophly-lubin",
     "fullName": "Me. Dophly LUBIN",
     "displayTitle": "Responsable d'images et du numérique",
     "shortBio": "Juriste, coach en art oratoire et technicien en développement communautaire.",
@@ -61,6 +67,7 @@
   },
   {
     "id": "membre-07",
+    "slug": "noberson-dely",
     "fullName": "Noberson Dely",
     "displayTitle": "Chargé des relations publiques",
     "shortBio": "Agent de santé communautaire polyvalent, chargé des relations publiques du CAP-MARJ.",
@@ -71,6 +78,7 @@
   },
   {
     "id": "membre-08",
+    "slug": "amos-olibrice",
     "fullName": "Amos Olibrice",
     "displayTitle": "Responsable chargé des relations publiques",
     "shortBio": "Juriste, étudiant en philosophie et politique, maître de cérémonie.",
@@ -81,6 +89,7 @@
   },
   {
     "id": "membre-09",
+    "slug": "exantia-louis",
     "fullName": "Exantia Louis",
     "displayTitle": "Responsable des archives et de la documentation",
     "shortBio": "Infirmière licenciée et entrepreneure, responsable des archives et de la documentation.",

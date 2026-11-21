@@ -303,60 +303,62 @@ Construire les trois composants de présentation qui affichent les données du s
 **Prochaine étape recommandée**
 V0-C3 : Header, Footer, PageLayout.
 
-## [V0-C3] — Ouverture — 2026-11-20
+## [V0-C3] — Ouverture — 2026-11-21
 
 **Phase précédente** : V0-C2 — Terminé — 37 tests verts, 3 fiches branchées sur le seed.
 
 **Phase ouverte** : V0-C3 — Header, Footer, PageLayout
 
-**Objectif** : Construire les trois composants de structure qui encadreront toutes les pages V0 : en-tête (logo, menu, bouton), pied de page (coordonnées, liens légaux, mention d'urgence), et mise en page générique (largeur, espacement, skip link).
+**Objectif** : Construire les trois composants de structure qui encadreront toutes les pages V0.
 
-**Livrable vérifiable** : une page coquille avec header + footer + contenu fonctionne dans `/dev/design` et sur `/` ; le menu mobile s'ouvre/ferme ; les liens légaux pointent vers des routes (même vides) ; `npm run build` OK.
+**Livrable vérifiable** : une page coquille avec header + footer + contenu fonctionne dans `/dev/design` et sur `/` ; le menu mobile s'ouvre/ferme ; les routes légales existent (pages vides) ; `npm run build` OK.
 
 **Ce que prévoient les documents**
-- PRD : §5.1 FR-PUB-06 (menu avec « Bientôt » en mode démo), FR-PUB-07 (mention d'urgence sur contact/rendez-vous), FR-PUB-08 (mentions légales et confidentialité depuis le pied de page)
-- UX/UI : §6 En-tête et pied de page (hauteur 64 px, sceau 44 px, fond blanc, filet inférieur, pas de flou), §11 (skip link, focus visible, menu mobile), §7 (mise en page accueil)
+- PRD : §5.1 FR-PUB-06 (menu « Bientôt » en mode démo), FR-PUB-07 (mention d'urgence), FR-PUB-08 (liens légaux)
+- UX/UI : §6 (En-tête 64 px, sceau 44 px, fond blanc, filet ; Pied de page marine ; panneau mobile plein écran), §11 (skip link, focus, menu mobile), §7 (mise en page accueil)
 - Appflow : §2 (menu selon le mode)
-- TRD : §4 (`src/app/` pour le routeur, `src/shared/ui/` pour header/footer), §5 (`VITE_DEMO_MODE`)
+- TRD : §4 (`src/app/`, `src/shared/ui/`), §5 (`VITE_DEMO_MODE`)
 - Plan : §4 (lot V0-C)
 
 **Ce qu'on a déjà**
-- `src/config/features.ts` — interrupteurs
-- `src/config/site.ts` — coordonnées du centre
-- `src/data/index.ts` — `getContentRepository()` pour l'organisation
-- `src/shared/ui/Button.tsx`, `Badge.tsx`, `EmergencyNotice.tsx` — à réutiliser
-- `src/shared/styles/tokens.css` — `--largeur-page`, `--e-*`, etc.
-- `src/App.tsx` — table de routes à enrichir
+- `src/config/features.ts`, `src/config/site.ts`
+- `src/data/index.ts` (`getContentRepository()`)
+- `src/shared/ui/Button.tsx`, `Badge.tsx`, `EmergencyNotice.tsx`
+- `src/shared/styles/tokens.css`
+- `lucide-react` installé (usage : menu mobile uniquement)
 
 **Fichiers à mettre à jour**
-- `src/App.tsx` — ajouter les routes `/contact`, `/mentions-legales`, `/confidentialite` (pages vides pour l'instant)
-- `src/features/dev/DesignPage.tsx` — envelopper dans `PageLayout` pour tester
+- `src/App.tsx` — routes `/contact`, `/mentions-legales`, `/confidentialite` (pages vides)
+- `src/features/dev/DesignPage.tsx` — envelopper dans `PageLayout`
 
 **Fichiers à créer**
+- `src/shared/ui/PageLayout.tsx`
 - `src/shared/ui/Header.tsx`
 - `src/shared/ui/Footer.tsx`
-- `src/shared/ui/PageLayout.tsx`
 - `src/shared/ui/__tests__/Header.test.tsx`
 - `src/shared/ui/__tests__/Footer.test.tsx`
+- `src/app/routes.ts` (table de routes partagée, si utile pour les liens du header/footer)
 
 **Ce qu'on doit trancher**
 | Réf. | Question | Réponse par défaut | Bloque ? |
 |---|---|---|---|
-| PRD-Q01 | Graphie du nom : « PsychoMédical » (formulaire) ou « Psycho-Médical » (logo) ? | Utiliser « CAP-MARJ » comme nom court dans le header, et « Centre d'Appui PsychoMédical Jean Renold Alphonse » comme nom complet dans le footer (cohérent avec le CSV) | non (à confirmer client) |
-| UX-Q01 | Logo vectoriel | Pas encore fourni → utiliser un texte « CAP-MARJ » en Literata, sans image | non |
-| UX-Q06 | Numéros d'urgence locaux | Seulement les numéros du centre | non |
-| PRD-Q19 | Horaires, réseaux sociaux | Adresse + téléphones + courriel uniquement | non |
+| PRD-Q01 | Graphie du nom | « CAP-MARJ » (header), « Centre d'Appui PsychoMédical Jean Renold Alphonse » (footer) | non |
+| UX-Q01 | Logo vectoriel | Texte « CAP-MARJ » en Literata, pas d'image | non |
+| UX-Q06 | Numéros d'urgence | Numéros du centre uniquement | non |
+| PRD-Q19 | Horaires, réseaux | Adresse + téléphones + courriel | non |
 
 **Ce qu'on doit changer et pourquoi**
 | Réf. doc | Prévu | Changement | Raison | Impact |
 |---|---|---|---|---|
-| UX/UI §6 En-tête | Sceau de 44 px | Texte « CAP-MARJ » en Literata (pas de logo vectoriel) | Logo non fourni (UX-Q01) | À remplacer quand le logo sera disponible |
+| UX/UI §6 Axes | « Pas de pictogramme décoratif » | Test d'icônes à gauche du titre effectué, jugé acceptable, **reporté à la phase d'ajustement UI/UX (V0-F)** | Éviter la dette visuelle et juger l'ensemble en fin de V0 | `AxisBlock` reste sans icône pour l'instant ; décision tracée |
+| UX/UI §6 En-tête | Sceau 44 px | Texte « CAP-MARJ » en Literata | Logo vectoriel non fourni | À remplacer quand le logo sera disponible |
 | UX/UI §6 Pied de page | Sceau sur pastille blanche | Nom complet en Literata | Idem | À remplacer |
+| Plan §4 | Lot V0-F = « Qualité » | Lot V0-F = « Qualité + ajustements UI/UX » (icônes, alignements, micro-détails) | Décision client : peaufiner l'UI en fin de V0, pas au fil de l'eau | À reporter dans 06_Plan_Implementation.md |
 
 **Risques identifiés**
-- Menu mobile : risque de réinventer un composant complexe → parade : panneau plein écran simple, fermeture à la touche Échap, focus piégé.
-- Mode démo : risque d'afficher « Bientôt » en production → parade : `VITE_DEMO_MODE` lu une seule fois, test unitaire.
-- Skip link : risque d'oubli → parade : premier élément focusable du `<body>`, cible `#main`.
+- Menu mobile : réinventer un composant complexe → panneau plein écran simple, fermeture Échap, focus piégé.
+- Mode démo : afficher « Bientôt » en production → `VITE_DEMO_MODE` lu une seule fois, test unitaire.
+- Skip link : oubli → premier élément focusable du `<body>`, cible `#main`.
 
 **Critères de sortie**
 - [ ] `Header` : logo texte, menu (Le centre, Services, FAQ, Contact), bouton « Nous contacter », menu mobile fonctionnel
@@ -368,3 +370,135 @@ V0-C3 : Header, Footer, PageLayout.
 - [ ] `npm run test` vert
 - [ ] `npm run build` vert
 - [ ] Contrôle UX/UI §12 passé
+
+## [V0-C3] — Header, Footer, PageLayout — 2026-11-21
+
+**Statut** : Terminé
+**Durée réelle** : non mesurée
+**Documents de référence** : PRD §5.1 (FR-PUB-06, FR-PUB-07, FR-PUB-08), §6 (RM-12) ; UX/UI §6 (En-tête, Pied de page, Mention d'urgence), §11 (skip link, focus, menu mobile), §7 ; Appflow §2 ; TRD §4, §5 ; Plan §4
+
+**Objectif de la phase**
+Construire les trois composants de structure qui encadrent toutes les pages V0.
+
+**Réalisé**
+- `src/shared/ui/PageLayout.tsx` — skip link (« Aller au contenu principal »), `<main id="main">`, largeur `--largeur-page`, espacement cohérent, header + footer.
+- `src/shared/ui/Header.tsx` — logo réel (`src/assets/capmarjlogo.webp`, 44 px, `alt=""` + `aria-label` sur le lien), menu desktop (Le centre, Services, FAQ, Contact), bouton « Nous contacter », menu mobile en panneau plein écran avec fermeture à la touche Échap et verrouillage du scroll.
+- `src/shared/ui/Footer.tsx` — logo sur pastille blanche, nom complet, coordonnées (courriel + téléphones cliquables), liens légaux (mentions, confidentialité), lien « Nous contacter », paragraphe sur la tarification variable, copyright + numéro fiscal.
+- `src/config/features.ts` — interrupteurs du TRD §5 (créé à cette étape, manquait depuis 1.2a).
+- `src/vite-env.d.ts` — types `ImportMetaEnv` (créé à cette étape).
+- `src/App.tsx` — routes `/contact`, `/mentions-legales`, `/confidentialite` (pages vides), `/` et `/dev/design` enveloppées dans `PageLayout`.
+- Tests : `Header.test.tsx` (3), `Footer.test.tsx` (4, dont le test « pas de mention d'urgence dans le footer »).
+
+**Écarts par rapport aux documents de base**
+| Réf. doc | Prévu | Réalisé | Raison |
+|---|---|---|---|
+| PRD §5.1 FR-PUB-07 | Mention d'urgence sur les pages Contact et Rendez-vous | Retirée du Footer ; reste prévue sur Contact et Rendez-vous (V0-D) | L'implémentation initiale l'avait placée dans le footer global, contraire à la limitation du PRD ; le formulaire client ne mentionne aucune urgence |
+| PRD §10 PRD-Q05 | « Prix publiés en gourdes » | Tarification variable ; pas de prix publié en V0 ; footer oriente vers le contact direct | Le client indique que les tarifs varient selon la situation (voir PRD mis à jour) |
+| UX/UI §6 Axes | « Pas de pictogramme décoratif » | Test d'icônes à gauche du titre effectué, jugé acceptable, **reporté à la phase d'ajustement UI/UX (V0-F)** | Éviter la dette visuelle, juger l'ensemble en fin de V0 ; `AxisBlock` reste sans icône pour l'instant |
+| UX/UI §6 En-tête / Pied | Sceau 44 px, pastille blanche | Logo réel `capmarjlogo.webp` en 44 px, `alt=""` + `aria-label` sur le lien | Logo fourni, meilleure accessibilité (pas de double lecture) |
+| Plan §4 | Lot V0-F = « Qualité » | Lot V0-F = « Qualité + ajustements UI/UX » | Décision client : peaufiner l'UI en fin de V0, pas au fil de l'eau |
+
+**Décisions prises**
+- `EmergencyNotice` conservé comme composant, réservé aux pages Contact et Rendez-vous (FR-PUB-07) → à reporter dans le PRD (fait, FR-PUB-07 précisé) et RM-12 ajouté.
+- Tarification variable : footer oriente vers le contact direct ; en V1.1, utiliser `priceNote` plutôt que `priceAmount` fixe → à reporter dans TRD-Q10 (fait).
+- Logo : `alt=""` + `aria-label` sur le lien (évite la double lecture), `width`/`height` fixés pour le CLS.
+- Menu mobile : Lucide `Menu` / `X` uniquement (usage fonctionnel), `aria-expanded`, `aria-controls`, fermeture Échap, scroll verrouillé.
+
+**Fichiers créés / modifiés / supprimés**
+- Créés : `src/shared/ui/PageLayout.tsx`, `Header.tsx`, `Footer.tsx`, `__tests__/Header.test.tsx`, `__tests__/Footer.test.tsx`, `src/config/features.ts`, `src/vite-env.d.ts`.
+- Modifiés : `src/App.tsx` (routes + PageLayout), `src/features/dev/DesignPage.tsx` (enveloppé dans PageLayout), `src/shared/ui/AxisBlock.tsx` (retour à la version sans icône), `__tests__/AxisBlock.test.tsx` (retour à 1 test), `docs/01_PRD_Exigences_Produit.md` (FR-PUB-07, PRD-Q05, RM-12), `docs/02_TRD_Exigences_Techniques.md` (TRD-Q10).
+- Supprimés : aucun.
+
+**Vérifications**
+- `npm run test` : 44 passed.
+- `npm run build` : OK, logo hashé dans `dist/assets/`, HTML pré-rendu contient `<img>`.
+- `npm run dev` : header et footer visibles, menu mobile fonctionnel, `/dev/design` intact.
+
+**Reste à faire / points ouverts**
+- Les pages Contact et Mentions légales / Confidentialité sont des placeholders (V0-D).
+- Les liens `/#services` et `/#faq` du header pointent vers des ancres qui n'existent pas encore (elles seront créées en V0-D sur la page d'accueil).
+- Phase d'ajustement UI/UX (V0-F) : icônes des axes, alignements, micro-détails.
+
+**Prochaine étape recommandée**
+V0-D : pages Accueil, À propos, Équipe, Contact, mentions légales, confidentialité.
+
+## [V0-D] — Ouverture — 2026-11-21
+
+**Phase précédente** : V0-C3 — Terminé — Header, Footer, PageLayout livrés, 44 tests verts.
+
+**Phase ouverte** : V0-D — Pages publiques de la V0
+
+**Objectif** : Construire les 7 pages de la V0 (Accueil, À propos, Équipe, Contact, Mentions légales, Confidentialité, 404) en assemblant les composants de C1–C3 et les données du seed, conformément à l'UX/UI §7 et au PRD §4.
+
+**Livrable vérifiable** : les 7 routes sont accessibles, sans lien mort, avec le contenu du seed, responsive 360/768/1280, accessibles au clavier ; `npm run build` génère les 7 pages pré-rendues.
+
+**Ce que prévoient les documents**
+- PRD : §4 (contenu V0), §5.1 (FR-PUB-01 à 08), §5.2 (FR-CON-01, FR-CON-02), §8 (critères d'acceptation V0), §11 (interdits)
+- UX/UI : §7 (mise en page de l'accueil, pages V0), §6 (composants), §8 (ton éditorial et libellés), §9 (photographie), §11 (accessibilité), §12 (contrôle), §14 (interdits)
+- Appflow : §1 (plan du site), §2 (menu), §3 (V0 : le visiteur contacte le centre)
+- TRD : §7 (performance, SEO), §8 (intégrations : Resend, Turnstile), §9 (accessibilité)
+- Plan : §4 (lot V0-D), §12 (définition de « terminé »)
+
+**Ce qu'on a déjà**
+- `src/shared/ui/` : Button, Badge, EmergencyNotice, Field, Accordion, ServiceCard, TeamCard, AxisBlock, Header, Footer, PageLayout
+- `src/data/` : contrats Zod, seed (organisation, 4 axes, 9 membres, 5 services, 5 FAQ), `getContentRepository()`
+- `src/config/` : `site.ts`, `features.ts`
+- `src/App.tsx` : routes `/`, `/contact`, `/mentions-legales`, `/confidentialite` (placeholders), `/dev/design`
+- `src/assets/capmarjlogo.webp`
+- `lucide-react` installé
+
+**Fichiers à mettre à jour**
+- `src/App.tsx` — remplacer les placeholders par les vraies pages, ajouter `/a-propos`, `/equipe`, `/404`
+- `src/shared/ui/Header.tsx` — ajuster les liens si les routes changent (`/a-propos`, `/equipe`)
+- `docs/07_Journal_Implementation.md` — cette entrée
+
+**Fichiers à créer**
+- `src/features/home/HomePage.tsx` (toutes les sections de l'accueil, avec ancres `#services` et `#faq`)
+- `src/features/about/AboutPage.tsx`
+- `src/features/team/TeamPage.tsx` (9 fiches + panneau « Lire la présentation »)
+- `src/features/contact/ContactPage.tsx` (coordonnées, mention d'urgence, formulaire)
+- `src/features/legal/LegalPage.tsx` (mentions légales)
+- `src/features/legal/PrivacyPage.tsx` (confidentialité)
+- `src/features/not-found/NotFoundPage.tsx` (404)
+- `src/features/contact/ContactForm.tsx` (formulaire avec Turnstile, envoi vers `/api/contact`)
+- `api/contact.ts` (fonction serveur Vercel)
+- Tests : `HomePage.test.tsx`, `ContactForm.test.tsx`, `TeamPage.test.tsx` (au minimum)
+
+**Ce qu'on doit trancher**
+| Réf. | Question | Réponse par défaut | Bloque ? |
+|---|---|---|---|
+| PRD-Q17 | Contenu des 5 questions FAQ (0 réponse reçue) | Rédiger 8 questions pratiques (tarifs, déroulement, confidentialité, prise de RDV, urgences, paiement) ; le client valide | oui (pour la section FAQ de l'accueil) |
+| PRD-Q18 | Consentement des photos | `photoPath: null` pour l'instant, placeholder initiale ; photos réelles uniquement si consentement écrit | non |
+| PRD-Q19 | Horaires, réseaux sociaux | Adresse + téléphones + courriel uniquement | non |
+| TRD-Q01 | Nom de domaine et courriel pro | Formulaire en prévisualisation : envoi vers l'adresse du développeur ; en production : domaine vérifié requis | oui (pour l'envoi réel) |
+| UX-Q01 | Logo vectoriel | Logo `.webp` utilisé ; version vectorielle à demander | non |
+| — | Texte de la page À propos | Utiliser l'historique du seed (déjà rédigé), structurer en sections | non |
+| — | Mentions légales / confidentialité | Brouillons rédigés par nous, à relire par les juristes du centre | non (brouillon V0) |
+| — | 404 | Page simple avec liens vers Accueil et Services | non |
+
+**Ce qu'on doit changer et pourquoi**
+| Réf. doc | Prévu | Changement | Raison | Impact |
+|---|---|---|---|---|
+| PRD §4 | « Services et FAQ : sections de l'accueil, atteintes par ancres » | On garde cette décision (pas de pages `/services` et `/faq` séparées en V0) | Conforme à l'UX/UI §7 | Les liens du header `/#services` et `/#faq` fonctionneront une fois l'accueil construit |
+| PRD §8 | Formulaire « en prévisualisation, envoi vers l'adresse du développeur » | À implémenter tel quel ; Resend en mode démo tant que TRD-Q01 n'est pas résolu | Conforme | Envoi réel possible seulement quand le domaine sera vérifié |
+
+**Risques identifiés**
+- FAQ sans réponses (PRD-Q17) → bloquant pour la section FAQ ; parade : rédiger 8 questions/réponses par nous, faire valider
+- Photos absentes (PRD-Q18) → placeholders initiaux ; parade : remplacer quand consentement obtenu
+- Formulaire sans domaine vérifié (TRD-Q01) → envoi vers adresse développeur en prévisualisation ; parade : documenter la bascule
+- Performance sur mobile 3G → images WebP, lazy loading, pas de JS inutile ; parade : Lighthouse à la fin
+- SEO : titres et métadonnées par page → `react-helmet-async` (déjà dans `vite-react-ssg`) ; parade : un composant `PageMeta` par page
+
+**Critères de sortie**
+- [ ] Les 7 pages existent et sont accessibles sans lien mort
+- [ ] Contenu issu exclusivement du seed (ou des brouillons validés)
+- [ ] Ancres `#services` et `#faq` fonctionnelles sur l'accueil
+- [ ] Formulaire de contact : validation, Turnstile, envoi vers `/api/contact`, états succès/erreur
+- [ ] Mention d'urgence sur Contact uniquement (pas sur les autres pages)
+- [ ] Panneau « Lire la présentation » sur la page Équipe (focus piégé, fermeture Échap)
+- [ ] Responsive 360 / 768 / 1280
+- [ ] Accessibilité clavier + contrastes
+- [ ] `npm run test` vert
+- [ ] `npm run build` vert (7 pages pré-rendues)
+- [ ] Contrôle UX/UI §12 (9 questions) passé
+- [ ] Critères d'acceptation PRD §8 vérifiés

@@ -1,0 +1,30 @@
+[
+  {
+    "id": "evt-2017-10-10",
+    "date": "2017-10-10",
+    "title": "Fondation du CAP-MARJ",
+    "description": "Jean Renold Alphonse fonde le Centre d'Appui Psycho-Médical à Port-de-Paix, autour de quatre axes : santé globale, recherche intégrée, entrepreneuriat social et engagement communautaire.",
+    "isMilestone": true
+  },
+  {
+    "id": "evt-2018",
+    "date": "2018",
+    "title": "Structuration des premières activités",
+    "description": "À compléter avec le client.",
+    "isMilestone": false
+  },
+  {
+    "id": "evt-2020",
+    "date": "2020",
+    "title": "Développement des branches",
+    "description": "À compléter avec le client.",
+    "isMilestone": false
+  },
+  {
+    "id": "evt-2026",
+    "date": "2026",
+    "title": "Refonte de la présence en ligne",
+    "description": "Le centre se dote d'un site web pour présenter son offre, ses services et son équipe.",
+    "isMilestone": true
+  }
+]

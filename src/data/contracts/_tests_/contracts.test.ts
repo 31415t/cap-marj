@@ -11,6 +11,8 @@ import organisation from '../../seed/organisation.json'
 import axes from '../../seed/axes.json'
 import equipe from '../../seed/equipe.json'
 import faq from '../../seed/faq.json'
+import { TimelineEventSchema } from '..'
+import timeline from '../../seed/historique.json'
 
 describe('contrats — validation du seed', () => {
   it("valide l'organisation", () => {
@@ -52,5 +54,20 @@ describe('contrats — validation du seed', () => {
 
   it('tous les services V0 sont de type "request"', () => {
     services.forEach((s) => expect(s.workflowType).toBe('request'))
-  })
+  }),
+
+  it('les identifiants des membres sont uniques et valides', () => {
+    const ids = equipe.map((m) => m.id)
+    expect(new Set(ids).size).toBe(ids.length)
+    ids.forEach((id) => expect(id).toMatch(/^[a-z0-9-]+$/))
+  }),
+
+  it("valide les événements de l'historique", () => {
+  expect(timeline.length).toBeGreaterThan(0)
+  timeline.forEach((e) => expect(() => TimelineEventSchema.parse(e)).not.toThrow())
+})
+
+it("les dates de l'historique sont dans un format triable", () => {
+  timeline.forEach((e) => expect(e.date).toMatch(/^\d{4}(-\d{2}(-\d{2})?)?$/))
+})
 })

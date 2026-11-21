@@ -7,7 +7,10 @@ import axesRaw from '../../seed/axes.json'
 import teamRaw from '../../seed/equipe.json'
 import servicesRaw from '../../seed/services.json'
 import faqRaw from '../../seed/faq.json'
+import { TimelineEventSchema } from '../../contracts'
+import timelineRaw from '../../seed/historique.json'
 
+const timeline = timelineRaw.map((x) => TimelineEventSchema.parse(x))
 const organisation = OrganisationSchema.parse(organisationRaw)
 const axes = axesRaw.map((x) => AxeSchema.parse(x))
 const team = teamRaw.map((x) => TeamMemberSchema.parse(x))
@@ -21,5 +24,7 @@ export function createMockContentRepository(): ContentRepository {
     listTeam: async () => team.filter((m) => m.isPublished).sort((a, b) => a.position - b.position),
     listServices: async () => services.filter((s) => s.isPublished).sort((a, b) => a.position - b.position),
     listFaq: async () => faq.filter((f) => f.isPublished).sort((a, b) => a.position - b.position),
+    listTimeline: async () =>
+  [...timeline].sort((a, b) => a.date.localeCompare(b.date)),
   }
 }

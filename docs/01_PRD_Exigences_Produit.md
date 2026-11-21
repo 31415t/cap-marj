@@ -3,9 +3,9 @@
 
 | Champ | Valeur |
 |---|---|
-| Version du document | 0.1 |
+| Version du document | 0.2 |
 | Statut | Brouillon, à valider avec le client |
-| Dernière mise à jour | 13 novembre 2026 |
+| Dernière mise à jour | 21 novembre 2026 |
 | Phases couvertes | V0 Vitrine, puis V1 (fonctionnalités de base), puis V2 |
 | Documents liés | [TRD](02_TRD_Exigences_Techniques.md) · [Appflow](03_Appflow.md) · [UX/UI](04_UX_UI_Design.md) · [Backend Schema](05_Backend_Schema.md) · [Plan d'implémentation](06_Plan_Implementation.md) |
 | Rôle de ce document | Source de vérité du **quoi** et du **pourquoi**. Toute évolution de périmètre commence ici. |
@@ -52,7 +52,7 @@ La répartition exacte des rôles est à confirmer (voir PRD-Q08). Un même comp
 
 | Version | Contenu | Sortie |
 |---|---|---|
-| **V0 Vitrine** | Accueil, À propos, Équipe, Services (cartes avec bouton « Nous contacter »), FAQ, Contact, mentions légales et confidentialité (brouillons). Menu avec rubriques futures marquées « Bientôt » en mode démonstration. Aucune base de données. | Lien de prévisualisation + démonstration au client |
+| **V0 Vitrine** | Accueil, À propos, Équipe, Services (cartes avec bouton « Nous contacter »), FAQ, Contact, mentions légales et confidentialité (brouillons). Menu avec rubriques futures marquées « Bientôt » en mode démonstration. **Aucun article de blog n'est publié en V0 ; la rubrique Blog reste masquée en production et « Bientôt » en mode démonstration (FR-PUB-06).** Aucune base de données. | Lien de prévisualisation + démonstration au client |
 | **V1.0** | Connexion administrateur, contenus modifiables (services, équipe, FAQ), blog, demandes de contact enregistrées et consultables | Le client met à jour son contenu seul |
 | **V1.1** | Comptes utilisateurs, disponibilités, réservation de rendez-vous, parcours de paiement par preuve, validation manuelle, lien Google Meet, courriels de confirmation et de rappel | Parcours complet d'un rendez-vous payant |
 | **V1.2** | Sessions de formation et d'ateliers avec inscription, registre des mémorants (inscription, suivi de statut, export) | Registre opérationnel |
@@ -74,7 +74,7 @@ Priorité : **M** = indispensable, **S** = souhaitable, **C** = optionnel. Versi
 | FR-PUB-04 | Cartes services : nom, résumé, bouton d'action. Champs optionnels (cible, inclusions, prix) affichés dès qu'ils sont renseignés | M | V0 |
 | FR-PUB-05 | Bouton d'action de chaque service déduit de son type de parcours (V0 : « Nous contacter » pour tous) | M | V0 |
 | FR-PUB-06 | Menu qui affiche les rubriques futures en « Bientôt » en mode démonstration et les masque en production | M | V0 |
-| FR-PUB-07 | Mention « En cas d'urgence » avec les numéros du centre sur les pages de contact et de rendez-vous | M | V0 |
+| FR-PUB-07 | Mention « En cas d'urgence » avec les numéros du centre, **affichée uniquement sur la page Contact et sur la page de rendez-vous** (jamais dans l'en-tête ou le pied de page globaux). La phrase d'orientation générique est obligatoire ; les numéros du centre sont cliquables (`tel:`). Aucun numéro d'urgence externe n'est affiché sans confirmation écrite du client (UX-Q06). | M | V0 |
 | FR-PUB-08 | Mentions légales et politique de confidentialité accessibles depuis le pied de page | M | V0 |
 
 ### 5.2 Contact
@@ -150,22 +150,27 @@ Priorité : **M** = indispensable, **S** = souhaitable, **C** = optionnel. Versi
 | RM-07 | Aucune donnée clinique n'est stockée en V1 | Défaut de sécurité |
 | RM-08 | Les numéros de paiement ne sont visibles qu'après connexion, dans le parcours de paiement | Défaut de sécurité |
 | RM-09 | Un rendez-vous payant n'est jamais confirmé avant validation de la preuve | Décision de conception |
-| RM-10 | Aucun service d'urgence n'est assuré en ligne ; la mention d'urgence est permanente | Défaut de sécurité |
+| RM-10 | Aucun service d'urgence n'est assuré en ligne ; la mention d'urgence est permanente sur les pages concernées | Défaut de sécurité |
 | RM-11 | Les mineurs ne créent pas de compte ; un responsable légal réserve pour eux | Défaut, à valider juridiquement (PRD-Q12) |
+| RM-12 | La mention d'urgence ne figure que sur les pages Contact et Rendez-vous, jamais dans le pied de page global ; elle ne remplace pas un service d'urgence et le dit explicitement | Décision de conception (phase C3) |
+
+### Tarification (décision du 21/11/2026, ex-PRD-Q05)
+
+Les tarifs **varient selon la situation de la personne** ; aucun prix fixe n'est publié. En V0, le pied de page et les fiches service orientent vers le contact direct. En V1.1, le champ `price_note` (texte libre, ex. « Tarif adapté à la situation, nous consulter ») est utilisé à la place de `price_amount` pour les services concernés ; `price_amount` reste utilisé pour les services à tarif fixe (ex. frais d'inscription à une session). Devise : gourdes (HTG) par défaut ; dollars (USD) possible par service.
 
 ## 7. Inventaire des contenus reçus
 
 | Élément | État | Action nécessaire |
 |---|---|---|
 | Identité (nom, courriel, téléphones, adresse, date de création, numéro fiscal) | Reçu | Confirmer la graphie officielle du nom (PRD-Q01) |
-| Logo | Reçu en JPG (fond blanc, marges importantes) | Obtenir un fichier vectoriel ou PNG haute définition (UX-Q01) |
+| Logo | **Fourni en WebP (`capmarjlogo.webp`), utilisé dans l'en-tête et le pied de page** | Obtenir si possible la version vectorielle ou PNG haute définition (UX-Q01, non bloquant) |
 | Historique | Reçu | Corriger l'incohérence « quatre axes » / trois listés (PRD-Q03) |
 | Équipe | 9 présentations reçues, formats inégaux (de 1 ligne à un CV complet) | Normaliser en titre, rôle, résumé, biographie |
 | Photos équipe et moments clés | Liens Drive | Télécharger, vérifier la qualité, obtenir les consentements (PRD-Q18) |
-| Services | 5 descriptions en paragraphes | Compléter cible, inclusions, prix, payant ou gratuit (PRD-Q06) |
+| Services | 5 descriptions en paragraphes | Compléter cible, inclusions, prix, payant ou gratuit (PRD-Q06) — la tarification variable est tranchée (voir §6) |
 | Moyens de paiement | 3 canaux reçus | Aucune, à saisir dans la configuration |
 | Décisions de la section 6 | 4 sur 6 reçues | Modération et anonymat du Q/R manquants (PRD-Q15) |
-| FAQ | 5 questions, 0 réponse | Réécrire avec de vraies questions pratiques (PRD-Q17) |
+| FAQ | 5 questions, **réponses à vérifier dans `faq.json` (non confirmées par le journal)** | Réécrire avec de vraies questions pratiques (PRD-Q17) |
 | Mentions légales, confidentialité | À rédiger | Brouillon par nous, relecture par les juristes du centre |
 | Horaires, réseaux sociaux, nom de domaine | Non reçus | Voir PRD-Q19 et TRD-Q01 |
 
@@ -196,13 +201,14 @@ Priorité : **M** = indispensable, **S** = souhaitable, **C** = optionnel. Versi
 
 ## 10. Informations manquantes
 
+*(PRD-Q05 a été résolu le 21/11/2026 et reporté au §6 ; voir journal des modifications.)*
+
 | Réf | Information manquante | Question à poser au client | Réponse par défaut (suggestion) | Bloque |
 |---|---|---|---|---|
 | PRD-Q01 | Graphie officielle du nom | « PsychoMédical » (formulaire) ou « Psycho-Médical » (logo) ? | Centre d'Appui Psycho-Médical Jean Renold Alphonse (CAP-MARJ), comme sur le logo | V0 |
 | PRD-Q02 | Lien entre axes, branches et services | Les 4 axes et les branches (Santé mentale, Recherche, Affaires sanitaires…) sont-ils la même chose ? | Axes = identité (accueil) ; branches = organisation interne (page Équipe) ; services = offre | V0 |
 | PRD-Q03 | Quatrième axe absent du texte du fondateur | Le texte doit-il lister les quatre axes ? | Oui, corriger pour lister les quatre | V0 |
 | PRD-Q04 | Langues du site | Français seul, ou aussi créole ? | Français seul ; structure prête pour d'autres langues sans traduction | V0 |
-| PRD-Q05 | Tarifs : publication, devise | Publier les prix ? En gourdes ou en dollars ? | Prix publiés en gourdes pour les services à rendez-vous ; « sur devis » pour recherche et engagement communautaire | V1.1 |
 | PRD-Q06 | Cible, inclusions, payant ou gratuit par service | Voir tableau pré-rempli ci-dessous | Tableau pré-rempli par nous, corrigé par le client | V1.1 |
 | PRD-Q07 | Sens de « devenir membre » | Membre de quoi : bénéficiaire, mémorant, abonné ? | Pas de statut « membre » ; un simple compte utilisateur ; « mémorant » = type d'inscription (V1.2) | V1.1 |
 | PRD-Q08 | Répartition des rôles | Qui valide les paiements, répond au Q/R, analyse les tests, gère le contenu ? | Administrateur = fondateur ; Finance = responsable logistique et financier ; Professionnel = psychologues et coordonnateurs | V1.0 |
@@ -225,7 +231,7 @@ Priorité : **M** = indispensable, **S** = souhaitable, **C** = optionnel. Versi
 
 | Service | Parcours proposé | Cible proposée | Payant ? |
 |---|---|---|---|
-| 1. Consultation, évaluation et accompagnement psychologique | `appointment` | Enfants, adolescents, adultes, familles, personnes en situation de vulnérabilité | Payant |
+| 1. Consultation, évaluation et accompagnement psychologique | `appointment` | Enfants, adolescents, adultes, familles, personnes en situation de vulnérabilité | Payant — **tarification variable (voir §6)** |
 | 2. Accompagnement académique et universitaire | `registration` (rendez-vous d'orientation possible) | Élèves, étudiants, chercheurs, jeunes professionnels | À confirmer (frais d'inscription ?) |
 | 3. Recherche intégrée et expertise scientifique | `request` | Institutions, organisations, chercheurs | Sur devis |
 | 4. Formation et renforcement des capacités | `registration` (sessions) | Professionnels, étudiants, institutions, acteurs communautaires | Selon la session |
@@ -252,6 +258,9 @@ Priorité : **M** = indispensable, **S** = souhaitable, **C** = optionnel. Versi
 - Ne jamais afficher les numéros de paiement hors du parcours de paiement connecté.
 - Ne jamais envoyer d'information de santé par courriel ou message ; les notifications restent neutres.
 
+**Sur la gouvernance documentaire (nouveau)**
+- Ne jamais modifier un document de base (01 à 06) dans le même geste qu'une implémentation, sans entrée de journal dédiée (voir doc 06 §11). Un changement de PRD exige une ligne au journal des modifications, avec date, version, citation avant/après et validation écrite du client.
+
 ## 12. Glossaire
 
 | Terme | Sens |
@@ -267,3 +276,4 @@ Priorité : **M** = indispensable, **S** = souhaitable, **C** = optionnel. Versi
 | Date | Version | Modification | Auteur |
 |---|---|---|---|
 | 13/11/2026 | 0.1 | Création à partir des réponses au formulaire et des décisions de cadrage | Développeur |
+| 21/11/2026 | 0.2 | Intégration des décisions de la phase C : mention d'urgence limitée aux pages Contact et Rendez-vous (FR-PUB-07 précisé, RM-12 ajouté) ; tarification variable (ex-PRD-Q05, reportée au §6) ; précision sur le blog (aucun article publié en V0) ; logo WebP signalé comme fourni ; règle de gouvernance documentaire ajoutée aux interdits | Développeur |

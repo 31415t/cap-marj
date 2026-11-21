@@ -1,3 +1,4 @@
+import { PageLayout } from '../../shared/ui/PageLayout'
 import { Button } from '../../shared/ui/Button'
 import { Badge } from '../../shared/ui/Badge'
 import { EmergencyNotice } from '../../shared/ui/EmergencyNotice'
@@ -23,9 +24,9 @@ useEffect(() => {
   repo.listAxes().then(setAxes)
 }, [])
   return (
+    <PageLayout>
     <div
       className="p-8 space-y-12 bg-papier text-encre"
-      style={{ maxWidth: 'var(--largeur-page)' }}
     >
       <header className="space-y-2">
         <h1 className="text-h1 font-titre text-encre">Design system — CAP-MARJ</h1>
@@ -104,5 +105,6 @@ useEffect(() => {
   </div>
 </section>
     </div>
+    </PageLayout>
   )
 }
