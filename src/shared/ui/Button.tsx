@@ -1,4 +1,5 @@
 import type { ButtonHTMLAttributes, ReactNode } from 'react'
+import { Link, type LinkProps } from 'react-router-dom'
 
 export type ButtonVariant = 'primary' | 'secondary' | 'link'
 
@@ -21,6 +22,10 @@ const variants: Record<ButtonVariant, string> = {
     'text-vert-cap underline underline-offset-[3px] hover:text-vert-cap-fonce px-0 h-auto',
 }
 
+function getClassName(variant: ButtonVariant, className: string) {
+  return `${base} ${variants[variant]} ${className}`.trim()
+}
+
 export function Button({
   variant = 'primary',
   className = '',
@@ -28,10 +33,32 @@ export function Button({
   type = 'button',
   ...rest
 }: ButtonProps) {
-  const cls = `${base} ${variants[variant]} ${className}`.trim()
+  const cls = getClassName(variant, className)
   return (
     <button type={type} className={cls} {...rest}>
       {children}
     </button>
+  )
+}
+
+export interface ButtonLinkProps extends Omit<LinkProps, 'to'> {
+  to: string
+  variant?: ButtonVariant
+  className?: string
+  children: ReactNode
+}
+
+export function ButtonLink({
+  to,
+  variant = 'primary',
+  className = '',
+  children,
+  ...rest
+}: ButtonLinkProps) {
+  const cls = getClassName(variant, className)
+  return (
+    <Link to={to} className={cls} {...rest}>
+      {children}
+    </Link>
   )
 }

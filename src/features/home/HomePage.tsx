@@ -9,30 +9,52 @@ import { TeamCard } from '../../shared/ui/TeamCard'
 import { Accordion } from '../../shared/ui/Accordion'
 import { EmergencyNotice } from '../../shared/ui/EmergencyNotice'
 
+interface HomePageData {
+  org: Organisation | null
+  axes: Axe[]
+  services: Service[]
+  team: TeamMember[]
+  faq: FaqItem[]
+}
+
+const emptyHomePageData: HomePageData = {
+  org: null,
+  axes: [],
+  services: [],
+  team: [],
+  faq: [],
+}
+
+let cachedHomePageData: HomePageData | undefined
+
 export function HomePage() {
-  const [org, setOrg] = useState<Organisation | null>(null)
-  const [axes, setAxes] = useState<Axe[]>([])
-  const [services, setServices] = useState<Service[]>([])
-  const [team, setTeam] = useState<TeamMember[]>([])
-  const [faq, setFaq] = useState<FaqItem[]>([])
+  const [data, setData] = useState<HomePageData>(
+    () => cachedHomePageData ?? emptyHomePageData,
+  )
 
   useEffect(() => {
     const repo = getContentRepository()
-    repo.getOrganisation().then(setOrg)
-    repo.listAxes().then(setAxes)
-    repo.listServices().then(setServices)
-    repo.listTeam().then(setTeam)
-    repo.listFaq().then(setFaq)
+    Promise.all([
+      repo.getOrganisation(),
+      repo.listAxes(),
+      repo.listServices(),
+      repo.listTeam(),
+      repo.listFaq(),
+    ]).then(([org, axes, services, team, faq]) => {
+      const loadedData = { org, axes, services, team, faq }
+      cachedHomePageData = loadedData
+      setData(loadedData)
+    })
   }, [])
 
   return (
     <>
       <Hero />
-      <AxesSection axes={axes} />
-      <ServicesSection services={services} />
-      <AboutSection org={org} />
-      <TeamPreview team={team.slice(0, 4)} />
-      <FaqSection faq={faq} />
+      <AxesSection axes={data.axes} />
+      <ServicesSection services={data.services} />
+      <AboutSection org={data.org} />
+      <TeamPreview team={data.team.slice(0, 4)} />
+      <FaqSection faq={data.faq} />
       <ContactSection />
     </>
   )

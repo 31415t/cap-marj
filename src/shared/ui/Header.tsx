@@ -1,7 +1,7 @@
 import { useEffect, useState } from 'react'
 import { Menu, X } from 'lucide-react'
 import { Link, NavLink } from 'react-router-dom'
-import { Button } from './Button'
+import { ButtonLink } from './Button'
 import { Badge } from './Badge'
 import { features } from '../../config/features'
 import logoUrl from '/images/equipe/capmarjlogo.webp'
@@ -69,7 +69,7 @@ export function Header() {
               </span>
             ),
           )}
-          <Button>Nous contacter</Button>
+          <ButtonLink to="/contact">Nous contacter</ButtonLink>
         </nav>
 
         <button
@@ -120,7 +120,9 @@ export function Header() {
               ),
             )}
             <div className="pt-3">
-              <Button onClick={() => setOpen(false)}>Nous contacter</Button>
+              <ButtonLink to="/contact" onClick={() => setOpen(false)}>
+                Nous contacter
+              </ButtonLink>
             </div>
           </nav>
         </div>

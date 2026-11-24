@@ -502,3 +502,108 @@ V0-D : pages Accueil, À propos, Équipe, Contact, mentions légales, confidenti
 - [ ] `npm run build` vert (7 pages pré-rendues)
 - [ ] Contrôle UX/UI §12 (9 questions) passé
 - [ ] Critères d'acceptation PRD §8 vérifiés
+
+## [V0-D + V0-E] — Pages publiques et formulaire de contact — 2026-11-24
+
+**Statut** : Terminé (avec deux reports documentés : Turnstile, envoi réel)
+**Durée réelle** : non mesurée
+**Documents de référence** : PRD §4, §5.1 (FR-PUB-01 à 08), §5.2 (FR-CON-01, FR-CON-02), §6 (RM-12), §8 (critères d'acceptation V0), §11 ; UX/UI §6, §7, §8, §9, §11, §12, §14 ; Appflow §1, §2, §3 ; TRD §4, §7, §8, §9, §10 ; Plan §4 (lots V0-D, V0-E), §12
+
+**Objectif de la phase**
+Construire les 7 pages publiques de la V0 et rendre le formulaire de contact fonctionnel (fonction serveur, anti-spam, envoi courriel).
+
+**Réalisé**
+
+*Pages (V0-D)*
+- `src/features/home/HomePage.tsx` — hero, 4 axes, 5 services + bloc « vous hésitez », résumé court du centre (2 phrases rédigées, remplace l'extrait de `history`), aperçu équipe (4 cartes), FAQ (6 questions), section contact avec lien vers `/contact`. Ancres `#services` et `#faq` fonctionnelles.
+- `src/features/about/AboutPage.tsx` — article encyclopédique : chapeau, image placeholder, 6 sections en accordéon (`<details>` natif) : Identité et mission (ouverte par défaut), Les quatre axes, Services, Organisation et branches, Historique (timeline), Chiffres clés.
+- `src/features/team/TeamPage.tsx` — 9 cartes, paragraphe d'introduction rédigé.
+- `src/features/team/TeamMemberPage.tsx` — page dédiée par membre (`/equipe/:slug`), bio complète, flèche retour `ArrowLeft`, message « Membre introuvable » si slug inconnu.
+- `src/features/contact/ContactPage.tsx` — coordonnées, mention d'urgence, formulaire.
+- `src/features/not-found/NotFoundPage.tsx` — 404 avec deux liens (accueil, services).
+- `src/features/legal/LegalPage.tsx` — mentions légales (brouillon, bandeau d'avertissement).
+- `src/features/legal/PrivacyPage.tsx` — politique de confidentialité (brouillon, bandeau d'avertissement).
+- `src/shared/ui/Timeline.tsx` — timeline datée (filet vertical, pastilles, jalons verts), `formatDate` gère les ISO partiels.
+- `src/shared/ui/BackToTop.tsx` — bouton flottant « retour en haut » (apparaît après 600 px, `ArrowUp`, `aria-label`, respect de `prefers-reduced-motion`).
+- `src/shared/ui/ScrollToTop.tsx` — supprimé, remplacé par `ScrollRestoration` (React Router) + `history.scrollRestoration = 'manual'` dans `main.tsx`.
+- `src/data/seed/historique.json` — 4 événements (fondation 2017, 2018, 2020, 2026), 2 jalons ; les événements 2018 et 2020 sont des templates « à compléter avec le client ».
+- `src/data/contracts/timelineEvent.ts` + export dans `index.ts` ; `listTimeline()` ajouté au port et à l'adaptateur mock.
+- `src/data/seed/equipe.json` — ajout du `slug` aux 9 membres ; photos intégrées (`photoPath` renseigné, consentements obtenus via Google Forms).
+- `src/shared/ui/TeamCard.tsx` — carte cliquable (`<Link>` vers `/equipe/:slug`), CTA « Voir le profil » avec `ArrowRight`, uniforme entre accueil et page Équipe.
+- `src/shared/ui/AxisBlock.tsx` — retour à la version sans icône (décision reportée à V0-F).
+- `src/shared/ui/Header.tsx` — menu mobile en panneau déroulant sous le header (remplace le plein écran), bouton hamburger/croix toujours visible, fermeture Échap, `sticky top-0 z-50`.
+- `src/shared/ui/Footer.tsx` — logo sur pastille blanche, paragraphe sur la tarification variable orientant vers `/contact` ; mention d'urgence retirée du footer.
+
+*Formulaire (V0-E)*
+- `src/features/contact/ContactForm.tsx` — React Hook Form + Zod, champs nom, courriel, téléphone, service, message ; avertissement « ne décrivez pas votre situation personnelle » ; honeypot invisible ; états `idle` / `sending` / `success` / `error` ; message de succès avec lien « Envoyer un autre message ».
+- `src/data/contracts/contactRequest.ts` — schéma Zod partagé client/serveur ; refine « au moins un courriel ou un téléphone » ; honeypot `website` (max 0).
+- `api/contact.ts` — fonction Vercel : vérification méthode POST, limitation de débit (5 req / 10 min / IP), validation Zod, honeypot silencieux, envoi Resend, gestion des erreurs 400/405/429/502/503.
+- `.env.example` — toutes les variables (publiques et secrets) documentées, sans valeur.
+- `react-hook-form`, `@hookform/resolvers`, `@vercel/node` installés.
+
+*Tests*
+- `AboutPage.test.tsx` (6), `NotFoundPage.test.tsx` (1), `Timeline.test.tsx` (4), `HomePage.test.tsx` (6), `ContactForm.test.tsx` (3), `TeamCard.test.tsx` adapté (lien vers `/equipe/:slug`, CTA), `contracts.test.ts` étendu (`historique.json`, slugs uniques).
+
+**Écarts par rapport aux documents de base**
+
+| Réf. document | Prévu | Réalisé | Raison |
+|---|---|---|---|
+| Appflow §1 | « Équipe » = une page | Page liste `/equipe` + pages membres `/equipe/:slug` (pré-rendues SSG) | Décision client : page dédiée par membre type « mini Wikipedia », gain SEO (URL propre, meta, données structurées), partage, maintenance |
+| PRD FR-PUB-03 | « biographie complète au clic » | Biographie complète sur la page dédiée du membre | Idem |
+| UX/UI §6 Fiche équipe | « ouvre la page ou un panneau » | Ouvre la page dédiée | Idem ; un panneau demande piège de focus + Échap + verrouillage scroll (3 sources de bugs), la page est plus simple et meilleure pour le SEO |
+| UX/UI §6 En-tête | Menu mobile en panneau plein écran | Panneau déroulant sous le header, bouton hamburger/croix toujours visible | Le plein écran recouvrait le bouton de fermeture (bug réel) et ne convenait pas au ton institutionnel ; le déroulant est plus sobre, plus accessible |
+| UX/UI §6 Pied de page | Mention d'urgence dans le footer | Retirée du footer ; réservée aux pages Contact et Rendez-vous | FR-PUB-07 limite la mention aux pages Contact et Rendez-vous ; le formulaire client ne mentionne aucune urgence |
+| PRD PRD-Q05 | « Prix publiés en gourdes » | Tarification variable ; footer oriente vers `/contact` | Le client indique que les tarifs varient selon la situation (RM-12 ajouté) |
+| UX/UI §6 Axes | « Pas de pictogramme décoratif » | Test d'icônes à gauche du titre effectué, jugé acceptable, reporté à V0-F | Éviter la dette visuelle ; `AxisBlock` reste sans icône |
+| PRD FR-PUB-02 | « Page À propos avec l'historique complet » | Article encyclopédique (6 accordéons) ; l'historique est une timeline datée dans une section dédiée | Décision client : distinguer « historique » (chronologie) de « à propos » (vue encyclopédique) ; l'historique fait partie du « à propos » |
+| UX/UI §7 | « Le centre en bref » = extrait de l'historique | Résumé rédigé de 2 phrases (ne duplique plus `org.history`) | `org.history` est un pavé de 4 paragraphes, mal adapté à une section d'accueil ; le résumé renvoie vers `/a-propos` |
+| TRD §8 | Turnstile anti-spam | Repli honeypot + limitation de débit (5 req / 10 min / IP) | Clés Turnstile non disponibles ; le TRD §8 prévoit explicitement ce repli |
+| TRD-Q01 / PRD §8 | Envoi vers l'adresse du centre | `CONTACT_TO_EMAIL` paramétrable ; en prévisualisation, adresse du développeur | Domaine non vérifié chez Resend ; à basculer quand TRD-Q01 sera résolu |
+| UX/UI §9 | Icônes : usage fonctionnel | `ArrowLeft` (retour page membre), `ArrowRight` (CTA carte équipe), `ArrowUp` (retour en haut), `Menu`/`X` (menu mobile) | Icônes fonctionnelles uniquement, trait 1,5 px, taille adaptée au contexte (16 px inline, 24 px navigation) ; emojis et banques génériques proscrits |
+| — | Pas prévu explicitement | `BackToTop` (bouton retour en haut) | Demande client ; icône fonctionnelle, apparaît après 600 px, présent sur toutes les pages publiques via `PageLayout` |
+| — | Pas prévu explicitement | `ScrollRestoration` + `history.scrollRestoration = 'manual'` | Correction d'un bug : les pages héritaient de la position de défilement de la page précédente ; le retour arrière restaure désormais la position |
+| Plan §4 | Lot V0-F = « Qualité » | Lot V0-F = « Qualité + ajustements UI/UX » (icônes des axes, chevron d'accordéon, alignements, micro-détails) | Décision client : peaufiner l'UI en fin de V0, pas au fil de l'eau |
+
+**Décisions prises**
+- Pages membres dédiées + carte uniforme cliquable → à reporter dans Appflow §1, PRD FR-PUB-03, UX/UI §6, Backend Schema §4.2 (`team_members.slug`), TRD §4.
+- Timeline datée + seed `historique.json` → à reporter dans PRD (nouvelle question PRD-Q23), UX/UI §7, Backend Schema §2 (`timeline_events`), Plan §4.
+- À propos en article encyclopédique → à reporter dans PRD FR-PUB-02, UX/UI §7.
+- Mention d'urgence hors footer → déjà reporté dans PRD FR-PUB-07 et RM-12.
+- Tarification variable → déjà reporté dans PRD-Q05 et TRD-Q10.
+- Menu mobile en panneau déroulant → à reporter dans UX/UI §6.
+- Bouton « Voir toute l'équipe » sous la grille (et non à côté du titre) → journal seulement (le schéma UX/UI §7 est indicatif).
+- CTA « Voir le profil » sur les cartes équipe : `<span>` à l'intérieur du `<Link>`, pas un bouton séparé (évite le double focus clavier) → journal seulement.
+- `BackToTop` sur toutes les pages publiques via `PageLayout` → journal seulement.
+- `ScrollRestoration` + `history.scrollRestoration = 'manual'` → journal seulement.
+- Photos équipe intégrées (consentements obtenus via Google Forms) → à reporter dans PRD-Q18 (résolu).
+- Textes rédactionnels à valider par le client : paragraphe d'introduction de la page Équipe, résumé du centre sur l'accueil, 6 questions/réponses de la FAQ, brouillons des mentions légales et de la politique de confidentialité.
+
+**Fichiers créés / modifiés / supprimés**
+- Créés : `src/features/home/HomePage.tsx`, `src/features/home/__tests__/HomePage.test.tsx`, `src/features/about/AboutPage.tsx`, `src/features/about/__tests__/AboutPage.test.tsx`, `src/features/team/TeamPage.tsx`, `src/features/team/TeamMemberPage.tsx`, `src/features/contact/ContactPage.tsx`, `src/features/contact/ContactForm.tsx`, `src/features/contact/__tests__/ContactForm.test.tsx`, `src/features/not-found/NotFoundPage.tsx`, `src/features/not-found/__tests__/NotFoundPage.test.tsx`, `src/features/legal/LegalPage.tsx`, `src/features/legal/PrivacyPage.tsx`, `src/shared/ui/Timeline.tsx`, `src/shared/ui/__tests__/Timeline.test.tsx`, `src/shared/ui/BackToTop.tsx`, `src/shared/ui/__tests__/BackToTop.test.tsx`, `src/data/seed/historique.json`, `src/data/contracts/timelineEvent.ts`, `src/data/contracts/contactRequest.ts`, `api/contact.ts`, `.env.example`.
+- Modifiés : `src/App.tsx` (routes, `ScrollRestoration`, `getStaticPaths` pour `/equipe/:slug`), `src/main.tsx` (`history.scrollRestoration = 'manual'`), `src/shared/ui/TeamCard.tsx` (lien + CTA), `src/shared/ui/Header.tsx` (menu déroulant), `src/shared/ui/Footer.tsx` (logo, tarification, retrait urgence), `src/shared/ui/AxisBlock.tsx` (retour sans icône), `src/shared/ui/PageLayout.tsx` (`BackToTop`), `src/data/seed/equipe.json` (slugs + photos), `src/data/seed/faq.json` (6 questions réelles), `src/data/ports/content.ts` (`listTimeline`), `src/data/adapters/mock/content.ts` (`listTimeline`), `src/data/contracts/index.ts` (exports), `src/data/contracts/teamMember.ts` (`slug`), `src/data/contracts/__tests__/contracts.test.ts` (timeline, slugs), `src/features/dev/DesignPage.tsx` (retrait `PageLayout`), `package.json` (react-hook-form, @hookform/resolvers, @vercel/node).
+- Supprimés : `src/shared/ui/ScrollToTop.tsx`, `src/shared/ui/__tests__/AxisBlock.test.tsx` (test SVG retiré).
+
+**Vérifications**
+- `npm run test` : tous les tests passent (décompte exact à confirmer avec `npm run test`).
+- `npm run build` : OK ; les 9 pages membres sont pré-rendues dans `dist/equipe/<slug>/index.html` (vérifié).
+- `npm run dev` : navigation entre pages, retour arrière restaure la position, bouton retour en haut fonctionnel, menu mobile déroulant, formulaire affiche les erreurs de validation.
+- Tests API : reportés (décision client).
+
+**Reste à faire / points ouverts**
+- Turnstile : à brancher quand les clés seront disponibles (V1.0 probablement).
+- Envoi réel vers l'adresse du centre : à basculer quand TRD-Q01 (domaine) sera résolu.
+- Tests API (`api/contact.ts`) : à écrire, décision client de reporter.
+- Textes rédactionnels à valider : paragraphe Équipe, résumé accueil, 6 FAQ, brouillons légaux.
+- Photos : intégrées ; vérifier la qualité (poids, dimensions) au moment de V0-F.
+- V0-F : responsive 360/768/1280, accessibilité, Lighthouse, contrôle UX/UI §12, ajustements UI/UX (icônes axes, chevron accordéon, alignements).
+- V0-G : déploiement prévisualisation, script de démo, grille de retours client.
+- Clôture V0 : validation écrite du client (critères PRD §8).
+
+**Prochaine étape recommandée**
+V0-F : qualité et ajustements UI/UX (responsive, accessibilité, Lighthouse, contrôle UX/UI §12).
+
+## Correctif — CTA vers la page Contact — 2026-11-24
+
+- Boutons « Nous contacter » du header (desktop et mobile) et des cartes services reliés à `/contact` avec des liens accessibles, tout en conservant le callback `onAction` des cartes.
+- Ajout de `ButtonLink` pour partager le style des boutons sans imbriquer un bouton dans un lien.
+- Tests ciblés Header et ServiceCard ajoutés ; tests ciblés (15), lint des fichiers modifiés et `npm run build` passent.

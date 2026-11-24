@@ -1,5 +1,5 @@
 import type { Service } from '../../data/contracts'
-import { Button } from './Button'
+import { ButtonLink } from './Button'
 
 export interface ServiceCardProps {
   service: Service
@@ -44,12 +44,13 @@ export function ServiceCard({ service, onAction }: ServiceCardProps) {
         </p>
       )}
       <div className="mt-auto pt-2">
-        <Button
+        <ButtonLink
+          to="/contact"
           onClick={() => onAction?.(service)}
           aria-label={`${service.ctaLabel} — ${service.name}`}
         >
           {service.ctaLabel}
-        </Button>
+        </ButtonLink>
       </div>
     </article>
   )

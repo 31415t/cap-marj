@@ -1,6 +1,7 @@
 import type { ReactNode } from 'react'
 import { Header } from './Header'
 import { Footer } from './Footer'
+import { BackToTop } from './ScrollToTop'
 
 export interface PageLayoutProps {
   children: ReactNode
@@ -22,6 +23,7 @@ export function PageLayout({ children }: PageLayoutProps) {
         </div>
       </main>
       <Footer />
+      <BackToTop />
     </>
   )
 }

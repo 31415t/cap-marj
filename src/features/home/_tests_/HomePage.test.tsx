@@ -42,6 +42,18 @@ describe('HomePage', () => {
     })
   })
 
+  it('conserve le contenu chargé lors du retour sur la page', async () => {
+    const firstRender = renderHome()
+    await waitFor(() => {
+      expect(screen.getByText('Questions fréquentes')).toBeInTheDocument()
+    })
+
+    firstRender.unmount()
+    renderHome()
+
+    expect(screen.getByText('Questions fréquentes')).toBeInTheDocument()
+  })
+
   it("contient les ancres #services et #faq", async () => {
     const { container } = renderHome()
     await waitFor(() => {
