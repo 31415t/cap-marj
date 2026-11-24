@@ -40,7 +40,7 @@ export function HomePage() {
 
 function Hero() {
   return (
-    <section className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center py-8 md:py-16">
+    <section className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center py-4 md:py-8">
       <div className="md:col-span-7 space-y-6">
         <h1 className="text-h1 font-titre text-encre">
           Centre d'Appui Psycho-Médical
@@ -56,8 +56,8 @@ function Hero() {
         </div>
       </div>
       <div className="md:col-span-5">
-        <div className="aspect-16/10 bg-marine rounded-(--rayon-fiche) flex items-center justify-center">
-          <span className="text-papier text-petit">Photo du centre (à venir)</span>
+        <div className="aspect-16/10 bg-marine rounded-(--rayon-fiche) overflow-hidden">
+          <img src="/images/equipe/Eventpicture1.jpg" alt="" className="h-full w-full object-cover" />
         </div>
       </div>
     </section>

@@ -4,7 +4,7 @@ import { Link, NavLink } from 'react-router-dom'
 import { Button } from './Button'
 import { Badge } from './Badge'
 import { features } from '../../config/features'
-import logoUrl from '../../assets/capmarjlogo.webp'
+import logoUrl from '/images/equipe/capmarjlogo.webp'
 
 const isDemo = import.meta.env.VITE_DEMO_MODE === 'true'
 
@@ -34,7 +34,7 @@ export function Header() {
   }, [open])
 
   return (
-    <header className="bg-papier border-b border-bordure sticky top-0 z-50">
+    <header className="bg-papier/50 border-b border-vert-cap backdrop-blur-sm sticky top-0 z-50">
       <div
         className="mx-auto px-4 md:px-6 h-16 flex items-center justify-between gap-4"
         style={{ maxWidth: 'var(--largeur-page)' }}
@@ -74,7 +74,7 @@ export function Header() {
 
         <button
           type="button"
-          className="lg:hidden inline-flex items-center justify-center w-11 h-11 rounded-[var(--rayon-controle)] text-encre hover:bg-brume"
+          className="lg:hidden inline-flex items-center justify-center w-11 h-11 rounded-(--rayon-controle) text-encre hover:bg-brume"
           aria-label={open ? 'Fermer le menu' : 'Ouvrir le menu'}
           aria-expanded={open}
           aria-controls="mobile-menu"

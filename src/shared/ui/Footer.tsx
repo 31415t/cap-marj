@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom'
 import { site } from '../../config/site'
-import logoUrl from '../../assets/capmarjlogo.webp'
+import logoUrl from '/images/equipe/capmarjlogo.webp'
 
 export function Footer() {
   const year = new Date().getFullYear()
@@ -11,7 +11,7 @@ export function Footer() {
         style={{ maxWidth: 'var(--largeur-page)' }}
       >
         <div>
-  <div className="inline-flex items-center justify-center bg-papier rounded-[var(--rayon-fiche)] p-2 mb-3">
+  <div className="inline-flex items-center justify-center bg-papier rounded-(--rayon-fiche) p-2 mb-3">
     <img
       src={logoUrl}
       alt=""
@@ -53,7 +53,6 @@ export function Footer() {
       <div className="mx-auto px-4 md:px-6 pb-8" style={{ maxWidth: 'var(--largeur-page)' }}>
         <p className="text-petit text-papier/80">
           Les tarifs et les modalités varient selon la situation. Pour toute information non présente sur le site (tarifs, disponibilité, cas particulier),{' '}
-          (tarifs, disponibilité, cas particulier),{' '}
           <Link to="/contact" className="underline underline-offset-[3px]">contactez directement le centre</Link>.
         </p>
         <p className="mt-4 text-petit text-papier/70">
