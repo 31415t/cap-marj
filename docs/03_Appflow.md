@@ -45,19 +45,46 @@ Il n'existe pas de page « Payer un service » isolée : le paiement fait partie
 
 ## 2. Menu principal selon le mode
 
-| Rubrique | V0 démonstration | V0 production | Activée en |
-|---|---|---|---|
-| Le centre (À propos, Équipe) | Visible | Visible | V0 |
-| Services | Visible | Visible | V0 |
-| FAQ | Visible | Visible | V0 |
-| Contact | Visible | Visible | V0 |
-| Blog | « Bientôt » | Masqué | V1.0 |
-| Passer un test | « Bientôt » | Masqué | V2 |
-| Questions et réponses | « Bientôt » | Masqué | V2 |
-| Se connecter | « Bientôt » | Masqué | V1.1 |
-| Bouton principal | Nous contacter | Nous contacter | Devient Prendre rendez-vous en V1.1 |
+Le menu est **stable d'une version à l'autre** : les rubriques futures sont regroupées sous « Rubriques » (sous-menu), jamais en entrées séparées. Cela évite un menu à 10 entrées en V2.
 
-Une rubrique « Bientôt » n'est pas cliquable et ne mène à aucune page vide.
+**Structure du menu (définitive)**
+
+| Entrée | Cible | Comportement |
+|---|---|---|
+| Accueil | `/` (hero) | Lien simple |
+| Le centre | `/a-propos` | Lien simple (l'Équipe est une section de cette page et un lien depuis l'accueil) |
+| Services | `/#services` | Ancre vers la section services de l'accueil |
+| FAQ | `/#faq` | Ancre vers la section FAQ de l'accueil |
+| Rubriques | Sous-menu | Déroulant au survol/clic sur desktop ; accordéon dans le menu mobile |
+| Mon espace / Se connecter | `/connexion` ou `/mon-espace` | Lien simple ; libellé dépend de l'état de connexion (V1.1) |
+| [Bouton CTA] | `/contact` (V0) puis `/rendez-vous` (V1.1) | Bouton principal |
+
+**Contenu du sous-menu « Rubriques »**
+
+| Sous-entrée | Cible | Activée en |
+|---|---|---|
+| Blog | `/blog` | V1.0 |
+| Questions et réponses | `/questions-reponses` | V2 |
+| Tests | `/tests` | V2 |
+
+**Visibilité par version et par mode**
+
+| Entrée | V0 production | V0 démonstration (`VITE_DEMO_MODE=true`) | V1.0 | V1.1 | V2 |
+|---|---|---|---|---|---|
+| Accueil | Visible | Visible | Visible | Visible | Visible |
+| Le centre | Visible | Visible | Visible | Visible | Visible |
+| Services | Visible | Visible | Visible | Visible | Visible |
+| FAQ | Visible | Visible | Visible | Visible | Visible |
+| Rubriques | **Masqué** (aucune sous-entrée active) | Visible, sous-entrées en « Bientôt » | Visible (Blog actif) | Visible (Blog actif) | Visible (Blog, Q/R, Tests actifs) |
+| Mon espace / Se connecter | **Masqué** | Visible, badge « Bientôt » | Masqué | Visible | Visible |
+| Bouton CTA | « Nous contacter » → `/contact` | « Nous contacter » → `/contact` | « Nous contacter » → `/contact` | « Prendre rendez-vous » → `/rendez-vous` | « Prendre rendez-vous » → `/rendez-vous` |
+
+**Règles**
+1. Une rubrique « Bientôt » n'est pas cliquable et ne mène à aucune page vide.
+2. Le sous-menu « Rubriques » n'apparaît pas en production tant qu'aucune sous-entrée n'est active (V0).
+3. Sur desktop, le sous-menu s'ouvre au survol et au clic ; il se ferme à la touche Échap et au clic extérieur.
+4. Sur mobile, « Rubriques » est une entrée qui déplie ses sous-entrées en accordéon dans le menu mobile.
+5. Le menu ne dépasse jamais 7 entrées + 1 bouton.
 
 ## 3. V0 : le visiteur contacte le centre
 

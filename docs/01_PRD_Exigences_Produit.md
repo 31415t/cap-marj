@@ -73,7 +73,7 @@ Priorité : **M** = indispensable, **S** = souhaitable, **C** = optionnel. Versi
 | FR-PUB-03 | Page Équipe : fiche courte par membre, biographie complète au clic | M | V0 |
 | FR-PUB-04 | Cartes services : nom, résumé, bouton d'action. Champs optionnels (cible, inclusions, prix) affichés dès qu'ils sont renseignés | M | V0 |
 | FR-PUB-05 | Bouton d'action de chaque service déduit de son type de parcours (V0 : « Nous contacter » pour tous) | M | V0 |
-| FR-PUB-06 | Menu qui affiche les rubriques futures en « Bientôt » en mode démonstration et les masque en production | M | V0 |
+| FR-PUB-06 | Menu stable : Accueil, Le centre, Services, FAQ, Rubriques (sous-menu regroupant Blog, Questions et réponses, Tests), Mon espace / Se connecter, bouton CTA. En mode démonstration, les rubriques futures apparaissent en « Bientôt » (non cliquables) ; en production, elles sont masquées tant qu'elles ne sont pas actives. Le sous-menu est déroulant sur desktop et accordéon sur mobile. | M | V0 |
 | FR-PUB-07 | Mention « En cas d'urgence » avec les numéros du centre, **affichée uniquement sur la page Contact et sur la page de rendez-vous** (jamais dans l'en-tête ou le pied de page globaux). La phrase d'orientation générique est obligatoire ; les numéros du centre sont cliquables (`tel:`). Aucun numéro d'urgence externe n'est affiché sans confirmation écrite du client (UX-Q06). | M | V0 |
 | FR-PUB-08 | Mentions légales et politique de confidentialité accessibles depuis le pied de page | M | V0 |
 
@@ -277,3 +277,4 @@ Les tarifs **varient selon la situation de la personne** ; aucun prix fixe n'est
 |---|---|---|---|
 | 13/11/2026 | 0.1 | Création à partir des réponses au formulaire et des décisions de cadrage | Développeur |
 | 21/11/2026 | 0.2 | Intégration des décisions de la phase C : mention d'urgence limitée aux pages Contact et Rendez-vous (FR-PUB-07 précisé, RM-12 ajouté) ; tarification variable (ex-PRD-Q05, reportée au §6) ; précision sur le blog (aucun article publié en V0) ; logo WebP signalé comme fourni ; règle de gouvernance documentaire ajoutée aux interdits | Développeur |
+| FR-PUB-06 | Menu qui affiche les rubriques futures en « Bientôt » en mode démonstration et les masque en production | M | V0 |

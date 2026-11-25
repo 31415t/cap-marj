@@ -65,7 +65,7 @@ function Hero() {
     <section className="grid grid-cols-1 md:grid-cols-12 gap-8 items-center py-4 md:py-8">
       <div className="md:col-span-7 space-y-6">
         <h1 className="text-h1 font-titre text-encre">
-          Centre d'Appui Psycho-Médical
+          Centre d'Appui Psycho-Médical Jean Renold Alphonse
         </h1>
         <p className="text-lead text-encre-douce max-w-(--mesure)">
           Depuis 2017, le CAP-MARJ accompagne les personnes et les communautés du

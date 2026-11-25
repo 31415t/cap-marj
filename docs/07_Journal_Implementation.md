@@ -607,3 +607,35 @@ V0-F : qualité et ajustements UI/UX (responsive, accessibilité, Lighthouse, co
 - Boutons « Nous contacter » du header (desktop et mobile) et des cartes services reliés à `/contact` avec des liens accessibles, tout en conservant le callback `onAction` des cartes.
 - Ajout de `ButtonLink` pour partager le style des boutons sans imbriquer un bouton dans un lien.
 - Tests ciblés Header et ServiceCard ajoutés ; tests ciblés (15), lint des fichiers modifiés et `npm run build` passent.
+
+## [V0-D bis] — Menu définitif figé — 2026-11-24
+
+**Statut** : Terminé (mise à jour documentaire, pas de code)
+**Documents de référence** : Appflow §2, PRD FR-PUB-06, UX/UI §6
+
+**Objectif** : Figer la structure du menu définitif avant V0-F, pour éviter de retoucher le Header à chaque version.
+
+**Décision**
+- Menu stable : Accueil · Le centre · Services · FAQ · Rubriques (sous-menu) · Mon espace / Se connecter · [Bouton CTA].
+- Sous-menu « Rubriques » : Blog (V1.0), Questions et réponses (V2), Tests (V2).
+- Desktop : déroulant au survol/clic. Mobile : accordéon.
+- Visibilité V0 : masqué en production, visible en mode démo avec badge « Bientôt ».
+- Bouton CTA : « Nous contacter » en V0/V1.0, « Prendre rendez-vous » à partir de V1.1.
+
+**Écarts par rapport aux documents de base**
+| Réf. doc | Prévu | Réalisé | Raison |
+|---|---|---|---|
+| Appflow §2 | Blog, Tests, Q/R en entrées séparées | Regroupés sous « Rubriques » (sous-menu) | Éviter un menu à 10 entrées en V2 ; lisibilité desktop et mobile |
+| Appflow §2 | « Se connecter » en entrée séparée | Intégré comme « Mon espace / Se connecter » | Convention ; un seul point d'entrée qui change de libellé selon l'état |
+
+**Fichiers modifiés**
+- `docs/03_Appflow.md` (§2 remplacé)
+- `docs/01_PRD_Exigences_Produit.md` (FR-PUB-06 reformulé)
+- `docs/04_UX_UI_Design.md` (§6 En-tête complété)
+
+**Reste à faire**
+- Implémenter le sous-menu dans `Header.tsx` (V0-F ou V1.0 selon le moment où Blog s'active).
+- En V0 production, le sous-menu est masqué : le Header actuel (sans sous-menu) reste valide jusqu'à V1.0.
+
+**Prochaine étape recommandée**
+V0-F : qualité et ajustements UI/UX.

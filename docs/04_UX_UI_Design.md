@@ -174,7 +174,32 @@ Fond sève, texte marine, casse de phrase, taille petite. Non cliquable.
 Bandeau à contour marine, fond brume, texte clair : le centre ne peut pas répondre aux urgences par le site ; en cas de danger immédiat, contacter les secours ou se rendre au service d'urgence le plus proche ; numéros du centre en lien cliquable. **Aucun numéro d'urgence extérieur n'est affiché sans confirmation du client** (UX-Q06).
 
 ### En-tête et pied de page
-En-tête de 64 px, fond blanc, filet inférieur, sceau de 44 px, nom court « CAP-MARJ » en Literata, menu, bouton principal. Pas de flou ni de transparence. Sur mobile, le menu s'ouvre en panneau plein écran. Pied de page sur fond marine : coordonnées, liens légaux, mention d'urgence ; le sceau y figure sur une pastille blanche (le fichier du logo est en couleur sur fond blanc).
+
+Hauteur 64 px, fond blanc, filet inférieur, logo (44 px), nom court « CAP-MARJ » en Literata, menu, bouton principal. Pas de flou ni de transparence.
+
+**Menu (structure stable, cf. Appflow §2)**
+
+| Entrée | Comportement visuel |
+|---|---|
+| Accueil | Lien texte, état actif en vert CAP |
+| Le centre | Lien texte, état actif en vert CAP |
+| Services | Lien texte, état actif en vert CAP |
+| FAQ | Lien texte, état actif en vert CAP |
+| Rubriques | Lien texte + chevron `ChevronDown` (Lucide, 16 px, trait 1,5 px) ; ouvre un panneau déroulant sous l'entrée |
+| Mon espace / Se connecter | Lien texte |
+| [Bouton CTA] | Bouton principal (vert CAP) |
+
+**Sous-menu « Rubriques » (desktop)**
+- Panneau déroulant ancré sous l'entrée, fond blanc, filet `--bordure`, pas d'ombre (ou `--ombre-superposition` si nécessaire pour la lisibilité).
+- Chaque sous-entrée : lien texte, hauteur 40 px, état actif en vert CAP.
+- Sous-entrées inactives (V0 démo) : texte `--encre-douce` + badge « Bientôt », non cliquables.
+- Ouverture au survol et au clic ; fermeture à la touche Échap et au clic extérieur ; `aria-expanded` sur le bouton parent.
+
+**Menu mobile**
+- Panneau déroulant sous le header (pas de plein écran).
+- « Rubriques » est une entrée qui déplie ses sous-entrées en accordéon (`<details>` natif ou équivalent accessible).
+- Le bouton hamburger devient croix, reste visible pendant l'ouverture.
+- Fermeture à la touche Échap. Pied de page sur fond marine : coordonnées, liens légaux, mention d'urgence ; le sceau y figure sur une pastille blanche (le fichier du logo est en couleur sur fond blanc).
 
 ## 7. Mise en page de l'accueil (V0)
 
